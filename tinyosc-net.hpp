@@ -216,8 +216,6 @@ extern "C"
 
 #endif  // tinyosc_net_hpp
 
-#define OSC_NET_IMPLEMENTATION
-
 #ifdef OSC_NET_IMPLEMENTATION
 
 #include <stdlib.h>
