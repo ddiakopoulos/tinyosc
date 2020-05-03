@@ -17,6 +17,7 @@ add_library(libtinyosc STATIC ${tinyosc_inc} ${tinyosc_src})
 set_target_properties(libtinyosc PROPERTIES LINKER_LANGUAGE CXX)
 target_compile_definitions(libtinyosc PRIVATE ${TINYOSC_DEFS})
 target_link_libraries(libtinyosc PUBLIC ${TINYOSC_LIBS})
+target_include_directories(libtinyosc SYSTEM PUBLIC ${TINYOSC_ROOT})
 
 if(WIN32)
     # Arch AVX is problematic for many users, so disable it until
