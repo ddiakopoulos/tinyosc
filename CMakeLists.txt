@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 3.10)
 
 include_guard()
@@ -12,11 +11,10 @@ set(CMAKE_DEBUG_POSTFIX _d)
 # tinyosc static lib
 
 file(GLOB tinyosc_inc "${TINYOSC_ROOT}/*.hpp")
-set(tinyosc_src "${TINYOSC_ROOT}/tinyosc_dry.cpp")
+set(tinyosc_src "${TINYOSC_ROOT}/tinyosc.cpp")
 
 add_library(libtinyosc STATIC ${tinyosc_inc} ${tinyosc_src})
 set_target_properties(libtinyosc PROPERTIES LINKER_LANGUAGE CXX)
-#target_include_directories(libtinyosc PRIVATE ${TINYOSC_ROOT}/third-party)
 target_compile_definitions(libtinyosc PRIVATE ${TINYOSC_DEFS})
 target_link_libraries(libtinyosc PUBLIC ${TINYOSC_LIBS})
 
@@ -27,7 +25,6 @@ if(WIN32)
     target_compile_options(libtinyosc PRIVATE /Zi)
 elseif(APPLE)
 elseif(UNIX)
-    #target_link_libraries(libtinyosc pthread)
     target_compile_options(libtinyosc PRIVATE -fPIC)
 endif()
 
@@ -37,20 +34,19 @@ install(FILES ${tinyosc_inc} DESTINATION include/tinyosc)
 add_library(Tiny::OSC ALIAS libtinyosc)
 
 #------------------------------------------------------------------------------
-# example TinyOSCSampleApp
+# example tinyosc application
 
-add_executable(TinyOSC_Sample "${TINYOSC_ROOT}/sample_main.cpp")
-target_link_libraries(TinyOSC_Sample Tiny::OSC)
+add_executable(tinyosc_sample "${TINYOSC_ROOT}/sample_main.cpp")
+target_link_libraries(tinyosc_sample Tiny::OSC)
 
 if(WIN32)
     # Arch AVX is problematic for many users, so disable it until
     # some reasonable strategy (a separate AVX target?) is determined
     #target_compile_options(${proj} PRIVATE /arch:AVX /Zi)
-    target_compile_options(TinyOSC_Sample PRIVATE /Zi)
+    target_compile_options(tinyosc_sample PRIVATE /Zi)
 elseif(APPLE)
 elseif(UNIX)
-    #target_link_libraries(TinyOSC_Sample pthread)
-    target_compile_options(TinyOSC_Sample PRIVATE -fPIC)
+    target_compile_options(tinyosc_sample PRIVATE -fPIC)
 endif()
 
-set_property(TARGET TinyOSC_Sample PROPERTY FOLDER "examples")
+set_property(TARGET tinyosc_sample PROPERTY FOLDER "examples")
