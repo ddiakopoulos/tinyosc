@@ -1,0 +1,21 @@
+version: 1.0.{build}
+
+image: Visual Studio 2019
+
+environment:
+  matrix:
+    - CMAKE_PLATFORM: "Visual Studio 16 2019"
+
+platform: x64
+configuration: 
+  - Release
+  - Debug
+
+install:
+  - git submodule update --init --recursive
+
+build_script:
+  - mkdir build
+  - cd build
+  - cmake -G "%CMAKE_PLATFORM%" -A x64 ..
+  - cmake --build . --target install --config %CONFIGURATION%
