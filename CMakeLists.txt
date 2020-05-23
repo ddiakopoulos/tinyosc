@@ -19,6 +19,8 @@ target_compile_definitions(libtinyosc PRIVATE ${TINYOSC_DEFS})
 target_link_libraries(libtinyosc PUBLIC ${TINYOSC_LIBS})
 target_include_directories(libtinyosc SYSTEM PUBLIC ${TINYOSC_ROOT})
 
+set_property(TARGET libtinyosc PROPERTY CXX_STANDARD 14)
+
 if(WIN32)
     # Arch AVX is problematic for many users, so disable it until
     # some reasonable strategy (a separate AVX target?) is determined
@@ -39,6 +41,7 @@ add_library(Tiny::OSC ALIAS libtinyosc)
 
 add_executable(tinyosc_sample "${TINYOSC_ROOT}/sample_main.cpp")
 target_link_libraries(tinyosc_sample Tiny::OSC)
+set_property(TARGET tinyosc_sample PROPERTY CXX_STANDARD 14)
 
 if(WIN32)
     # Arch AVX is problematic for many users, so disable it until
