@@ -32,6 +32,7 @@
 #include <string>
 #include <vector>
 #include <numeric>
+#include <limits>
 
 #ifdef min
     #undef min
