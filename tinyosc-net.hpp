@@ -10,6 +10,8 @@
 
 #include <string>
 #include <assert.h>
+#include <cstring>
+#include <limits>
 
 #if (defined(__linux) || defined(__unix) || defined(__posix) || defined(__LINUX__) || defined(__linux__))
     #define PLATFORM_LINUX
